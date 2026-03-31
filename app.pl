@@ -104,26 +104,29 @@ websocket '/ws/:workdir' => sub {
                 phase => 'latex',
                 message => 'Running LaTeX/BibTeX to process bibliography...'
             }));
-
+            my $latex_cmd = "latex -interaction=nonstopmode nocite";
+            my $bibtex_cmd = "bibtex nocite";
             # 和教授 bibproc.cgi 一样的命令
             if ($^O eq 'MSWin32') {
-                system("latex -interaction=nonstopmode nocite >nul 2>&1");
-                system("bibtex nocite >nul 2>&1");
-                system("latex -interaction=nonstopmode nocite >nul 2>&1");
+                  system("$latex_cmd >nul 2>&1");
+                  system("$bibtex_cmd >nul 2>&1");
+                  system("$latex_cmd >nul 2>&1");
             } else {
-                system("latex nocite > /dev/null 2>&1; bibtex nocite > /dev/null 2>&1; latex nocite > /dev/null 2>&1");
-            }
-            unlink "nocite.aux" if -e "nocite.aux";
-
-            unless (-e "nocite.rebib") {
-                $c->send(encode_json({
-                    type => 'error',
-                    message => 'LaTeX processing failed. nocite.rebib not generated. Make sure LaTeX/BibTeX is installed.'
+    # Render (Linux) 环境：尝试捕获输出日志，方便报错时排查
+                my $out = `$latex_cmd 2>&1`;
+                `$bibtex_cmd 2>&1`;
+                `$latex_cmd 2>&1`;
+    
+    # 如果还是没生成文件，就把 LaTeX 的最后报错发给前端
+                 unless (-e "nocite.rebib") {
+                 $c->send(encode_json({
+                   type => 'error',
+                   message => "LaTeX failed to create .rebib file. Last output: " . substr($out, -100)
                 }));
                 chdir $homedir;
                 return;
+              }
             }
-
             $c->send(encode_json({
                 type => 'status', phase => 'latex_done',
                 message => 'LaTeX processing complete.'
