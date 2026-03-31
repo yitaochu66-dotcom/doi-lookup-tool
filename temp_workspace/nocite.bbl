@@ -1,0 +1,180 @@
+\begin{thebibliography}{10}
+\providecommand{\bibitemdeclare}[2]{}
+\providecommand{\surnamestart}{}
+\providecommand{\surnameend}{}
+\providecommand{\urlprefix}{Available at }
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{\texttt{#2}}
+\providecommand{\urlalt}[2]{\href{#1}{#2}}
+\providecommand{\doi}[1]{doi:\urlalt{https://doi.org/#1}{#1}}
+\providecommand{\eprint}[1]{arXiv:\urlalt{https://arxiv.org/abs/#1}{#1}}
+\providecommand{\bibinfo}[2]{#2}
+
+\bibitemdeclare{article}{BernersLee1992}
+\bibitem{BernersLee1992}
+\bibinfo{author}{Tim \surnamestart Berners-Lee\surnameend},
+  \bibinfo{author}{Robert \surnamestart Cailliau\surnameend},
+  \bibinfo{author}{Jean-Francois \surnamestart Groff\surnameend} \&
+  \bibinfo{author}{Bernd \surnamestart Pollermann\surnameend}
+  (\bibinfo{year}{1992}): \emph{\bibinfo{title}{World-Wide Web: The Information
+  Universe}}.
+\newblock {\slshape \bibinfo{journal}{Electronic Networking: Research,
+  Applications and Policy}} \bibinfo{volume}{2}(\bibinfo{number}{1}), pp.
+  \bibinfo{pages}{52--58}.
+
+\bibitemdeclare{article}{BrinPage1998}
+\bibitem{BrinPage1998}
+\bibinfo{author}{Sergey \surnamestart Brin\surnameend} \&
+  \bibinfo{author}{Lawrence \surnamestart Page\surnameend}
+  (\bibinfo{year}{1998}): \emph{\bibinfo{title}{The Anatomy of a Large-Scale
+  Hypertextual Web Search Engine}}.
+\newblock {\slshape \bibinfo{journal}{Computer Networks and ISDN Systems}}
+  \bibinfo{volume}{30}(\bibinfo{number}{1-7}), pp. \bibinfo{pages}{107--117}.
+
+\bibitemdeclare{article}{Church1936}
+\bibitem{Church1936}
+\bibinfo{author}{Alonzo \surnamestart Church\surnameend}
+  (\bibinfo{year}{1936}): \emph{\bibinfo{title}{An Unsolvable Problem of
+  Elementary Number Theory}}.
+\newblock {\slshape \bibinfo{journal}{American Journal of Mathematics}}
+  \bibinfo{volume}{58}(\bibinfo{number}{2}), pp. \bibinfo{pages}{345--363}.
+
+\bibitemdeclare{article}{Codd1970}
+\bibitem{Codd1970}
+\bibinfo{author}{Edgar~F. \surnamestart Codd\surnameend}
+  (\bibinfo{year}{1970}): \emph{\bibinfo{title}{A Relational Model of Data for
+  Large Shared Data Banks}}.
+\newblock {\slshape \bibinfo{journal}{Communications of the ACM}}
+  \bibinfo{volume}{13}(\bibinfo{number}{6}), pp. \bibinfo{pages}{377--387}.
+
+\bibitemdeclare{inproceedings}{Cook1971}
+\bibitem{Cook1971}
+\bibinfo{author}{Stephen~A. \surnamestart Cook\surnameend}
+  (\bibinfo{year}{1971}): \emph{\bibinfo{title}{The Complexity of
+  Theorem-Proving Procedures}}.
+\newblock In: {\slshape \bibinfo{booktitle}{Proceedings of the 3rd Annual ACM
+  Symposium on Theory of Computing}}, pp. \bibinfo{pages}{151--158}.
+
+\bibitemdeclare{article}{DiffieHellman1976}
+\bibitem{DiffieHellman1976}
+\bibinfo{author}{Whitfield \surnamestart Diffie\surnameend} \&
+  \bibinfo{author}{Martin~E. \surnamestart Hellman\surnameend}
+  (\bibinfo{year}{1976}): \emph{\bibinfo{title}{New Directions in
+  Cryptography}}.
+\newblock {\slshape \bibinfo{journal}{IEEE Transactions on Information Theory}}
+  \bibinfo{volume}{22}(\bibinfo{number}{6}), pp. \bibinfo{pages}{644--654}.
+
+\bibitemdeclare{article}{Dijkstra1959}
+\bibitem{Dijkstra1959}
+\bibinfo{author}{Edsger~W. \surnamestart Dijkstra\surnameend}
+  (\bibinfo{year}{1959}): \emph{\bibinfo{title}{A Note on Two Problems in
+  Connexion with Graphs}}.
+\newblock {\slshape \bibinfo{journal}{Numerische Mathematik}}
+  \bibinfo{volume}{1}(\bibinfo{number}{1}), pp. \bibinfo{pages}{269--271}.
+
+\bibitemdeclare{article}{Hoare1961}
+\bibitem{Hoare1961}
+\bibinfo{author}{Charles A.~R. \surnamestart Hoare\surnameend}
+  (\bibinfo{year}{1961}): \emph{\bibinfo{title}{Algorithm 64: Quicksort}}.
+\newblock {\slshape \bibinfo{journal}{Communications of the ACM}}
+  \bibinfo{volume}{4}(\bibinfo{number}{7}), p. \bibinfo{pages}{321}.
+
+\bibitemdeclare{book}{Brooks1975}
+\bibitem{Brooks1975}
+\bibinfo{author}{Frederick P.~Brooks \surnamestart Jr.\surnameend}
+  (\bibinfo{year}{1975}): \emph{\bibinfo{title}{The Mythical Man-Month: Essays
+  on Software Engineering}}.
+\newblock \bibinfo{publisher}{Addison-Wesley}.
+
+\bibitemdeclare{incollection}{Karp1972}
+\bibitem{Karp1972}
+\bibinfo{author}{Richard~M. \surnamestart Karp\surnameend}
+  (\bibinfo{year}{1972}): \emph{\bibinfo{title}{Reducibility Among
+  Combinatorial Problems}}.
+\newblock In: {\slshape \bibinfo{booktitle}{Complexity of Computer
+  Computations}}, \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{85--103}.
+
+\bibitemdeclare{book}{Knuth1997}
+\bibitem{Knuth1997}
+\bibinfo{author}{Donald~E. \surnamestart Knuth\surnameend}
+  (\bibinfo{year}{1997}): \emph{\bibinfo{title}{The Art of Computer
+  Programming, Volume 1: Fundamental Algorithms}}, \bibinfo{edition}{3rd}
+  edition.
+\newblock \bibinfo{publisher}{Addison-Wesley}.
+
+\bibitemdeclare{article}{Lamport1978}
+\bibitem{Lamport1978}
+\bibinfo{author}{Leslie \surnamestart Lamport\surnameend}
+  (\bibinfo{year}{1978}): \emph{\bibinfo{title}{Time, Clocks, and the Ordering
+  of Events in a Distributed System}}.
+\newblock {\slshape \bibinfo{journal}{Communications of the ACM}}
+  \bibinfo{volume}{21}(\bibinfo{number}{7}), pp. \bibinfo{pages}{558--565}.
+
+\bibitemdeclare{article}{McCarthy1960}
+\bibitem{McCarthy1960}
+\bibinfo{author}{John \surnamestart McCarthy\surnameend}
+  (\bibinfo{year}{1960}): \emph{\bibinfo{title}{Recursive Functions of Symbolic
+  Expressions and Their Computation by Machine, Part I}}.
+\newblock {\slshape \bibinfo{journal}{Communications of the ACM}}
+  \bibinfo{volume}{3}(\bibinfo{number}{4}), pp. \bibinfo{pages}{184--195}.
+
+\bibitemdeclare{article}{Milner1992}
+\bibitem{Milner1992}
+\bibinfo{author}{Robin \surnamestart Milner\surnameend},
+  \bibinfo{author}{Joachim \surnamestart Parrow\surnameend} \&
+  \bibinfo{author}{David \surnamestart Walker\surnameend}
+  (\bibinfo{year}{1992}): \emph{\bibinfo{title}{A Calculus of Mobile Processes,
+  I}}.
+\newblock {\slshape \bibinfo{journal}{Information and Computation}}
+  \bibinfo{volume}{100}(\bibinfo{number}{1}), pp. \bibinfo{pages}{1--40}.
+
+\bibitemdeclare{article}{Nash1950}
+\bibitem{Nash1950}
+\bibinfo{author}{John~F. \surnamestart Nash\surnameend} (\bibinfo{year}{1950}):
+  \emph{\bibinfo{title}{Equilibrium Points in N-Person Games}}.
+\newblock {\slshape \bibinfo{journal}{Proceedings of the National Academy of
+  Sciences}} \bibinfo{volume}{36}(\bibinfo{number}{1}), pp.
+  \bibinfo{pages}{48--49}.
+
+\bibitemdeclare{inproceedings}{Pnueli1977}
+\bibitem{Pnueli1977}
+\bibinfo{author}{Amir \surnamestart Pnueli\surnameend} (\bibinfo{year}{1977}):
+  \emph{\bibinfo{title}{The Temporal Logic of Programs}}.
+\newblock In: {\slshape \bibinfo{booktitle}{Proceedings of the 18th Annual
+  Symposium on Foundations of Computer Science}}, pp. \bibinfo{pages}{46--57}.
+
+\bibitemdeclare{article}{RSA1978}
+\bibitem{RSA1978}
+\bibinfo{author}{Ronald~L. \surnamestart Rivest\surnameend},
+  \bibinfo{author}{Adi \surnamestart Shamir\surnameend} \&
+  \bibinfo{author}{Leonard \surnamestart Adleman\surnameend}
+  (\bibinfo{year}{1978}): \emph{\bibinfo{title}{A Method for Obtaining Digital
+  Signatures and Public-Key Cryptosystems}}.
+\newblock {\slshape \bibinfo{journal}{Communications of the ACM}}
+  \bibinfo{volume}{21}(\bibinfo{number}{2}), pp. \bibinfo{pages}{120--126}.
+
+\bibitemdeclare{article}{Shannon1948}
+\bibitem{Shannon1948}
+\bibinfo{author}{Claude~E. \surnamestart Shannon\surnameend}
+  (\bibinfo{year}{1948}): \emph{\bibinfo{title}{A Mathematical Theory of
+  Communication}}.
+\newblock {\slshape \bibinfo{journal}{Bell System Technical Journal}}
+  \bibinfo{volume}{27}(\bibinfo{number}{3}), pp. \bibinfo{pages}{379--423}.
+
+\bibitemdeclare{article}{Turing1936}
+\bibitem{Turing1936}
+\bibinfo{author}{Alan~M. \surnamestart Turing\surnameend}
+  (\bibinfo{year}{1936}): \emph{\bibinfo{title}{On Computable Numbers, with an
+  Application to the Entscheidungsproblem}}.
+\newblock {\slshape \bibinfo{journal}{Proceedings of the London Mathematical
+  Society}} \bibinfo{volume}{42}(\bibinfo{number}{1}), pp.
+  \bibinfo{pages}{230--265}.
+
+\bibitemdeclare{article}{Zadeh1965}
+\bibitem{Zadeh1965}
+\bibinfo{author}{Lotfi~A. \surnamestart Zadeh\surnameend}
+  (\bibinfo{year}{1965}): \emph{\bibinfo{title}{Fuzzy Sets}}.
+\newblock {\slshape \bibinfo{journal}{Information and Control}}
+  \bibinfo{volume}{8}(\bibinfo{number}{3}), pp. \bibinfo{pages}{338--353}.
+
+\end{thebibliography}

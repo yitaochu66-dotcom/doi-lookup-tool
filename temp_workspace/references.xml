@@ -1,0 +1,181 @@
+<bibliography>
+ <citation type="article" key="BernersLee1992">
+  <author>Tim <surname>Berners-Lee</surname></author>
+  <author>Robert <surname>Cailliau</surname></author>
+  <author>Jean-Francois <surname>Groff</surname></author>
+  <author>Bernd <surname>Pollermann</surname></author>
+  <year>1992</year>
+  <title>World-Wide Web: The Information Universe</title>
+  <journal>Electronic Networking: Research, Applications and Policy</journal>
+  <volume>2</volume>
+  <number>1</number>
+  <pages>52&#8211;58</pages>
+ </citation>
+ <citation type="article" key="BrinPage1998">
+  <author>Sergey <surname>Brin</surname></author>
+  <author>Lawrence <surname>Page</surname></author>
+  <year>1998</year>
+  <title>The Anatomy of a Large-Scale Hypertextual Web Search Engine</title>
+  <journal>Computer Networks and ISDN Systems</journal>
+  <volume>30</volume>
+  <number>1-7</number>
+  <pages>107&#8211;117</pages>
+ </citation>
+ <citation type="article" key="Church1936">
+  <author>Alonzo <surname>Church</surname></author>
+  <year>1936</year>
+  <title>An Unsolvable Problem of Elementary Number Theory</title>
+  <journal>American Journal of Mathematics</journal>
+  <volume>58</volume>
+  <number>2</number>
+  <pages>345&#8211;363</pages>
+ </citation>
+ <citation type="article" key="Codd1970">
+  <author>Edgar F. <surname>Codd</surname></author>
+  <year>1970</year>
+  <title>A Relational Model of Data for Large Shared Data Banks</title>
+  <journal>Communications of the ACM</journal>
+  <volume>13</volume>
+  <number>6</number>
+  <pages>377&#8211;387</pages>
+ </citation>
+ <citation type="inproceedings" key="Cook1971">
+  <author>Stephen A. <surname>Cook</surname></author>
+  <year>1971</year>
+  <title>The Complexity of Theorem-Proving Procedures</title>
+  <booktitle>Proceedings of the 3rd Annual ACM Symposium on Theory of Computing</booktitle>
+  <pages>151&#8211;158</pages>
+ </citation>
+ <citation type="article" key="DiffieHellman1976">
+  <author>Whitfield <surname>Diffie</surname></author>
+  <author>Martin E. <surname>Hellman</surname></author>
+  <year>1976</year>
+  <title>New Directions in Cryptography</title>
+  <journal>IEEE Transactions on Information Theory</journal>
+  <volume>22</volume>
+  <number>6</number>
+  <pages>644&#8211;654</pages>
+ </citation>
+ <citation type="article" key="Dijkstra1959">
+  <author>Edsger W. <surname>Dijkstra</surname></author>
+  <year>1959</year>
+  <title>A Note on Two Problems in Connexion with Graphs</title>
+  <journal>Numerische Mathematik</journal>
+  <volume>1</volume>
+  <number>1</number>
+  <pages>269&#8211;271</pages>
+ </citation>
+ <citation type="article" key="Hoare1961">
+  <author>Charles A. R. <surname>Hoare</surname></author>
+  <year>1961</year>
+  <title>Algorithm 64: Quicksort</title>
+  <journal>Communications of the ACM</journal>
+  <volume>4</volume>
+  <number>7</number>
+  <pages>321</pages>
+ </citation>
+ <citation type="book" key="Brooks1975">
+  <author>Frederick P. Brooks <surname>Jr.</surname></author>
+  <year>1975</year>
+  <title>The Mythical Man-Month: Essays on Software Engineering</title>
+  <publisher>Addison-Wesley</publisher>
+ </citation>
+ <citation type="incollection" key="Karp1972">
+  <author>Richard M. <surname>Karp</surname></author>
+  <year>1972</year>
+  <title>Reducibility Among Combinatorial Problems</title>
+  <booktitle>Complexity of Computer Computations</booktitle>
+  <publisher>Springer</publisher>
+  <pages>85&#8211;103</pages>
+ </citation>
+ <citation type="book" key="Knuth1997">
+  <author>Donald E. <surname>Knuth</surname></author>
+  <year>1997</year>
+  <title>The Art of Computer Programming, Volume 1: Fundamental Algorithms</title>
+  <edition>3rd</edition>
+  <publisher>Addison-Wesley</publisher>
+ </citation>
+ <citation type="article" key="Lamport1978">
+  <author>Leslie <surname>Lamport</surname></author>
+  <year>1978</year>
+  <title>Time, Clocks, and the Ordering of Events in a Distributed System</title>
+  <journal>Communications of the ACM</journal>
+  <volume>21</volume>
+  <number>7</number>
+  <pages>558&#8211;565</pages>
+ </citation>
+ <citation type="article" key="McCarthy1960">
+  <author>John <surname>McCarthy</surname></author>
+  <year>1960</year>
+  <title>Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I</title>
+  <journal>Communications of the ACM</journal>
+  <volume>3</volume>
+  <number>4</number>
+  <pages>184&#8211;195</pages>
+ </citation>
+ <citation type="article" key="Milner1992">
+  <author>Robin <surname>Milner</surname></author>
+  <author>Joachim <surname>Parrow</surname></author>
+  <author>David <surname>Walker</surname></author>
+  <year>1992</year>
+  <title>A Calculus of Mobile Processes, I</title>
+  <journal>Information and Computation</journal>
+  <volume>100</volume>
+  <number>1</number>
+  <pages>1&#8211;40</pages>
+ </citation>
+ <citation type="article" key="Nash1950">
+  <author>John F. <surname>Nash</surname></author>
+  <year>1950</year>
+  <title>Equilibrium Points in N-Person Games</title>
+  <journal>Proceedings of the National Academy of Sciences</journal>
+  <volume>36</volume>
+  <number>1</number>
+  <pages>48&#8211;49</pages>
+ </citation>
+ <citation type="inproceedings" key="Pnueli1977">
+  <author>Amir <surname>Pnueli</surname></author>
+  <year>1977</year>
+  <title>The Temporal Logic of Programs</title>
+  <booktitle>Proceedings of the 18th Annual Symposium on Foundations of Computer Science</booktitle>
+  <pages>46&#8211;57</pages>
+ </citation>
+ <citation type="article" key="RSA1978">
+  <author>Ronald L. <surname>Rivest</surname></author>
+  <author>Adi <surname>Shamir</surname></author>
+  <author>Leonard <surname>Adleman</surname></author>
+  <year>1978</year>
+  <title>A Method for Obtaining Digital Signatures and Public-Key Cryptosystems</title>
+  <journal>Communications of the ACM</journal>
+  <volume>21</volume>
+  <number>2</number>
+  <pages>120&#8211;126</pages>
+ </citation>
+ <citation type="article" key="Shannon1948">
+  <author>Claude E. <surname>Shannon</surname></author>
+  <year>1948</year>
+  <title>A Mathematical Theory of Communication</title>
+  <journal>Bell System Technical Journal</journal>
+  <volume>27</volume>
+  <number>3</number>
+  <pages>379&#8211;423</pages>
+ </citation>
+ <citation type="article" key="Turing1936">
+  <author>Alan M. <surname>Turing</surname></author>
+  <year>1936</year>
+  <title>On Computable Numbers, with an Application to the Entscheidungsproblem</title>
+  <journal>Proceedings of the London Mathematical Society</journal>
+  <volume>42</volume>
+  <number>1</number>
+  <pages>230&#8211;265</pages>
+ </citation>
+ <citation type="article" key="Zadeh1965">
+  <author>Lotfi A. <surname>Zadeh</surname></author>
+  <year>1965</year>
+  <title>Fuzzy Sets</title>
+  <journal>Information and Control</journal>
+  <volume>8</volume>
+  <number>3</number>
+  <pages>338&#8211;353</pages>
+ </citation>
+</bibliography>

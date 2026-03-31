@@ -1,0 +1,23 @@
+index.shtml	page for customers; fills in form processed at bibfile.php
+bibfile.php	processes form, saves input as file.bib and calls bibproc.cgi
+bibproc.cgi*	reference conversion program
+subrebib.pl*	subroutine of bibproc.cgi	shared with ~/scripts
+subxmlbib.pl*	subroutine of bibproc.cgi	shared with ~/scripts
+subcrossxml.pl	subroutine of bibproc.cgi	shared with ~/scripts
+cr.pl		subroutine of bibproc.cgi
+
+breakurl.sty@	auxiliary
+eptcs.bst@	auxiliary
+eptcs.cls@	auxiliary
+nocite.tex	auxiliary, called from bibproc.cgi
+nocite.rebib	generated, called from subrebib.pl and subxmlbib.pl
+file.bib	generated bibliography, created by bibfile.php and called from nocite.tex
+
+
+query.cgi*	form feeding into doilookup.cgi, called from previous bibproc.cgi and from above
+doilookup.cgi*	interface with crossref, called from query
+
+Doilookup.cgi*  interface with crossref, shows output locally (not in use)
+
+parameters from query to doilookup: workshop, paper, restype, first, last.
+
