@@ -313,6 +313,8 @@ websocket '/ws/:workdir' => sub {
     });
 };
 
+my $port = $ENV{PORT} || 8080;
+app->config(hypnotoad => {listen => ["http://*:$port"]});
 app->start;
 
 __DATA__
