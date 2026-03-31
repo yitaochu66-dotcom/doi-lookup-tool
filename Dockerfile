@@ -21,7 +21,7 @@ COPY . .
 RUN chmod -R +x subroutines/
 
 # 7. 告诉 Render 你的应用监听 3000 端口
-EXPOSE 3000
+EXPOSE 8080
 
 # 8. 启动命令：直接运行你的 app.pl
 CMD ["hypnotoad", "-f", "app.pl"]
