@@ -372,8 +372,9 @@ hr { border: none; border-top: 1px solid #999; margin: 0 20px 20px; }
         <b>DOI:</b> <a href="https://doi.org/10.4204/EPTCS" target="_blank">10.4204/EPTCS</a>&nbsp;
         <b>ISSN:</b> 2075-2180
     </span>
-    <button class="header-btn" style="background:#FFFF00">EPTCS Home Page</button>
-    <button class="header-btn" style="background:#00FFFF">Published Volumes</button>
+    <a href="https://doi.eptcs.org" style="text-decoration:none;">
+        <button class="header-btn" style="background:#FFFF00">Back to EPTCS</button>
+    </a>
 </div>
 
 <h1>Digital Object Identifiers</h1>
@@ -391,10 +392,11 @@ hr { border: none; border-top: 1px solid #999; margin: 0 20px 20px; }
 </form>
 
 <div class="info-box">
-    <h4>How it works</h4>
+    <h4>What's New in This Version</h4>
     <ul>
-        <li class="old">Original (bibproc.cgi): Upload file, white screen for 10-30 seconds, all results appear at once</li>
-        <li class="new">WebSocket version: Upload file, skeleton screen, results appear one by one in real-time</li>
+        <li class="new"><b>Upgraded CrossRef API:</b> Switched from the legacy XML Query API (doi.crossref.org/servlet/query) to the modern REST API (api.crossref.org/works). The new API uses fuzzy bibliographic search, significantly improving DOI lookup accuracy.</li>
+        <li class="new"><b>WebSocket Progressive Loading:</b> Instead of waiting for all results to load at once (white screen for 10-30 seconds), results now appear one by one in real-time via WebSocket, with a skeleton screen and progress bar.</li>
+        <li class="new"><b>Mojolicious Server:</b> Replaced the Apache + CGI architecture with Mojolicious, a modern Perl web framework that natively supports WebSocket and asynchronous I/O.</li>
     </ul>
 </div>
 
@@ -471,7 +473,9 @@ table td:first-child { font-weight: bold; width: 140px; }
         <b>DOI:</b> <a href="https://doi.org/10.4204/EPTCS" target="_blank">10.4204/EPTCS</a>
     </span>
     <button class="header-btn" style="background:#FFFF00" onclick="location.href='/'">Upload Another File</button>
-    <button class="header-btn" style="background:#00FFFF">Published Volumes</button>
+    <a href="https://doi.eptcs.org" style="text-decoration:none;">
+        <button class="header-btn" style="background:#FFFF00">Back to EPTCS</button>
+    </a>
 </div>
 
 <h1>DOI Lookup Results</h1>
