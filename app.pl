@@ -595,6 +595,7 @@ ws.onmessage = function(e) {
                 doiCell = '<a class="doi-link" href="https://doi.org/' + data.doi + '" target="_blank">' + data.doi + '</a>';
             } else if (data.status === 'low_confidence') {
                 row.className = 'row-low';
+                var clickableDoi = data.doi ? '<a class="doi-link" href="https://doi.org/' + data.doi + '" target="_blank">' + data.doi + '</a>' : 'N/A';
                 doiCell = (data.doi || 'N/A') + '<br><span style="font-size:10px;">' + esc(data.message) + '</span>';
             } else if (data.status === 'not_found') {
                 row.className = 'row-not-found';
