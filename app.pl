@@ -266,13 +266,51 @@ websocket '/ws/:workdir' => sub {
                                     $doi = $item->{DOI} || '';
                                     $score = $item->{score} || 0;
                                     if ($doi && $score > 1) {
-                                        $status = 'found';
-                                        $message = "DOI found (score: $score)";
-                                        $found_count++;
-                                    } else {
-                                        $status = 'low_confidence';
-                                        $message = "Low confidence match (score: $score)";
-                                    }
+    # 获取 CrossRef 返回的标题和作者
+    my $returned_title = lc($item->{title}[0] || '');
+    my $returned_author = '';
+    if ($item->{author} && @{$item->{author}}) {
+        $returned_author = lc($item->{author}[0]{family} || '');
+    }
+    
+    my $query_title = lc($title);
+    my $query_author = lc($author);
+    
+    # 去掉标点
+    $returned_title =~ s/[^\w\s]//g;
+    $query_title =~ s/[^\w\s]//g;
+    
+    # 标题匹配：检查关键词重合度
+    my @words = split(/\s+/, $query_title);
+    my $match_count = 0;
+    for my $w (@words) {
+        $match_count++ if length($w) > 3 && $returned_title =~ /\Q$w\E/i;
+    }
+    my $title_ratio = @words > 0 ? $match_count / scalar(@words) : 0;
+    
+    # 作者匹配：姓氏是否一致
+    my $author_match = 0;
+    if ($query_author && $returned_author) {
+        $author_match = 1 if $returned_author =~ /\Q$query_author\E/i 
+                          || $query_author =~ /\Q$returned_author\E/i;
+    }
+    
+    # 判定：标题匹配 > 40% 且作者匹配
+    if ($title_ratio > 0.4 && $author_match) {
+        $status = 'found';
+        $message = "DOI verified (title: " . int($title_ratio * 100) . "%, author: matched)";
+        $found_count++;
+    } elsif ($title_ratio > 0.4) {
+        $status = 'found';
+        $message = "DOI found (title: " . int($title_ratio * 100) . "%, author: not verified)";
+        $found_count++;
+    } elsif ($author_match) {
+        $status = 'low_confidence';
+        $message = "Same author, different paper (title: " . int($title_ratio * 100) . "%)";
+    } else {
+        $status = 'low_confidence';
+        $message = "Weak match (title: " . int($title_ratio * 100) . "%, author: mismatch)";
+    }
                                 }
                             };
                             if ($@) {
