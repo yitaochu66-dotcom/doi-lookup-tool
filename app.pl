@@ -5,21 +5,8 @@ use File::Copy;
 use File::Path qw(make_path remove_tree);
 use Cwd;
 
-# =============================================================
-# EPTCS DOI Lookup - WebSocket Progressive Loading Demo
-#
-# 复现教授的 DOI 查找功能，但用 WebSocket 逐条推送结果
-# 教授原版：上传 .bib → 白屏等待 → 结果一次性全部出现
-# 我们的版本：上传 .bib → 骨架屏 → 每查到一条立刻显示
-#
-# 运行: morbo app.pl
-# 访问: http://127.0.0.1:3000
-# =============================================================
-
-# 增大上传文件大小限制
 app->max_request_size(2 * 1024 * 1024); # 2MB
 
-# 首页 - 上传 .bib 文件
 get '/' => 'index';
 
 post '/upload' => sub {
@@ -30,7 +17,6 @@ post '/upload' => sub {
         return $c->render(text => 'Please go back and supply a bibtex file', status => 400);
     }
 
-    # 1. 获取绝对路径，防止 Windows 路径混淆
     my $homedir = getcwd();
     my $workdir_name = "temp_workspace";
     my $workdir_path = "$homedir/$workdir_name";
@@ -39,12 +25,9 @@ post '/upload' => sub {
     }
     make_path($workdir_path) or die "Cannot create $workdir_path: $!";
 
-    # 3. 保存上传文件为 file.bib (强制使用绝对路径保存)
     my $target_bib = "$workdir_path/file.bib";
     $upload->move_to($target_bib);
 
-    # 4. 复制必要的 LaTeX 样式文件 (eptcs.bst, eptcs.cls 等)
-    # 注意：此处不再复制 nocite.tex，我们将动态生成它
     for my $f (qw(latex/eptcs.bst latex/eptcs.cls latex/breakurl.sty)) {
         if (-e "$homedir/$f") {
             my $basename = $f;
@@ -53,24 +36,20 @@ post '/upload' => sub {
         }
     }
 
-    # 5. 动态生成绝对纯净的 nocite.tex (强制消除任何不可见换行符)
     my $tex_path = "$workdir_path/nocite.tex";
     open(my $fh, '>', $tex_path) or die "Could not write $tex_path: $!";
-    binmode($fh); # 强制二进制模式，防止 Windows 自动加回车符
+    binmode($fh); 
     print $fh "\\documentclass{eptcs}\n";
     print $fh "\\begin{document}\n";
     print $fh "\\bibliographystyle{eptcs}\n";
     print $fh "\\nocite{*}\n";
-    print $fh "\\bibliography{file}\n"; # 这里的 file 对应 file.bib
+    print $fh "\\bibliography{file}\n";
     print $fh "\\end{document}\n";
     close($fh);
 
-    # 6. 跳转到结果页面
     $c->redirect_to("/results/$workdir_name");
 };
 
-
-# 结果页面
 get '/results/:workdir' => sub {
     my $c = shift;
     my $workdir = $c->param('workdir');
@@ -78,7 +57,6 @@ get '/results/:workdir' => sub {
     $c->render('results');
 };
 
-# WebSocket 路由 - 逐条查询 DOI 并推送
 websocket '/ws/:workdir' => sub {
     my $c = shift;
     my $workdir = $c->param('workdir');
@@ -98,27 +76,24 @@ websocket '/ws/:workdir' => sub {
 
             chdir $fullpath;
 
-            # ======== 阶段1: LaTeX 处理 ========
             $c->send(encode_json({
-                type => 'status',
-                phase => 'latex',
+                type => 'status', phase => 'latex',
                 message => 'Running LaTeX/BibTeX to process bibliography...'
             }));
+            
             my $latex_cmd = "latex -interaction=nonstopmode nocite";
             my $bibtex_cmd = "bibtex nocite";
-            # 和教授 bibproc.cgi 一样的命令
+            
             if ($^O eq 'MSWin32') {
                  system("$latex_cmd >nul 2>&1");
                  system("$bibtex_cmd >nul 2>&1");
                  system("$latex_cmd >nul 2>&1");
             } else {
-    # Render (Linux) 环境：尝试捕获输出日志，方便报错时排查
                 my $out = `$latex_cmd 2>&1`;
                 `$bibtex_cmd 2>&1`;
                 `$latex_cmd 2>&1`;
     
-    # 如果还是没生成文件，就把 LaTeX 的最后报错发给前端
-                 unless (-e "nocite.rebib") {
+                unless (-e "nocite.rebib") {
                  $c->send(encode_json({
                    type => 'error',
                    message => "LaTeX failed to create .rebib file. Last output: " . substr($out, -100)
@@ -127,18 +102,17 @@ websocket '/ws/:workdir' => sub {
                 return;
               }
             }
+            
             $c->send(encode_json({
                 type => 'status', phase => 'latex_done',
                 message => 'LaTeX processing complete.'
             }));
 
-            # ======== 阶段2: 生成 XML ========
             $c->send(encode_json({
                 type => 'status', phase => 'xml',
                 message => 'Converting bibliography to XML format...'
             }));
 
-            # 设置教授子程序需要的全局变量
             our $name = "nocite";
             our $paper = ".";
             our $paperdir = ".";
@@ -156,7 +130,6 @@ websocket '/ws/:workdir' => sub {
                 message => 'XML conversion complete.'
             }));
 
-            # ======== 阶段3: 读取缺失 DOI 列表 ========
             my @missing;
             if (open(my $fh, '<', "missingDOIs")) {
                 local $/;
@@ -169,8 +142,7 @@ websocket '/ws/:workdir' => sub {
 
             if ($total == 0) {
                 $c->send(encode_json({
-                    type => 'complete',
-                    message => 'All references already have DOIs!',
+                    type => 'complete', message => 'All references already have DOIs!',
                     total => 0, found => 0
                 }));
                 chdir $homedir;
@@ -182,10 +154,6 @@ websocket '/ws/:workdir' => sub {
                 message => "Found $total references with missing DOIs. Starting CrossRef lookup...",
                 total => $total
             }));
-
-            # ======== 阶段4: 逐条查询 CrossRef ========
-            # 教授原版: for 循环同步查完才显示
-            # 我们: next_tick 异步查询，每查到一条 WebSocket 推送
 
             my $refs_xml = '';
             if (open(my $fh, '<', "references.xml")) {
@@ -206,7 +174,6 @@ websocket '/ws/:workdir' => sub {
                 chomp($key); chomp($type);
                 $i++;
 
-                # 从 references.xml 提取该文献信息
                 my ($title, $author, $year, $journal) = ('', '', '', '');
                 my $in_ref = 0;
                 for my $line (split /\n/, $refs_xml) {
@@ -220,14 +187,11 @@ websocket '/ws/:workdir' => sub {
                     }
                 }
 
-                # 通知前端正在查询
                 $c->send(encode_json({
-                    type => 'looking_up',
-                    index => $i, total => $total,
+                    type => 'looking_up', index => $i, total => $total,
                     key => $key, title => $title, author => $author,
                 }));
 
-                # 构建 CrossRef API 查询
                 my $query = "";
                 $query .= $author if $author;
                 $query .= " " . $title if $title;
@@ -238,20 +202,17 @@ websocket '/ws/:workdir' => sub {
                 if ($query eq '' || $query eq '+') {
                     $c->send(encode_json({
                         type => 'result', index => $i, total => $total,
-                        key => $key, title => $title,
-                        doi => '', status => 'no_data',
+                        key => $key, title => $title, doi => '', status => 'no_data',
                         message => "Not enough data to query"
                     }));
                     Mojo::IOLoop->next_tick($lookup_next);
                     return;
                 }
 
-                # Mojo::UserAgent 异步查询 CrossRef REST API
                 my $url = "https://api.crossref.org/works?query.bibliographic=$query&rows=1&mailto=doilookup\@eptcs.org";
 
                 $c->ua->get($url => sub {
                     my ($ua, $tx) = @_;
-
                     my $doi = '';
                     my $status = 'not_found';
                     my $message = 'No DOI found';
@@ -265,8 +226,8 @@ websocket '/ws/:workdir' => sub {
                                     my $item = $json->{message}{items}[0];
                                     $doi = $item->{DOI} || '';
                                     $score = $item->{score} || 0;
+                                    
                                     if ($doi && $score > 1) {
-                                        # 获取 CrossRef 返回的标题和作者
                                         my $returned_title = lc($item->{title}[0] || '');
                                         my $returned_author = '';
                                         if ($item->{author} && @{$item->{author}}) {
@@ -276,11 +237,9 @@ websocket '/ws/:workdir' => sub {
                                         my $query_title = lc($title);
                                         my $query_author = lc($author);
                                         
-                                        # 去掉标点
                                         $returned_title =~ s/[^\w\s]//g;
                                         $query_title =~ s/[^\w\s]//g;
                                         
-                                        # 标题匹配：检查关键词重合度
                                         my @words = split(/\s+/, $query_title);
                                         my $match_count = 0;
                                         for my $w (@words) {
@@ -288,14 +247,12 @@ websocket '/ws/:workdir' => sub {
                                         }
                                         my $title_ratio = @words > 0 ? $match_count / scalar(@words) : 0;
                                         
-                                        # 作者匹配：姓氏是否一致
                                         my $author_match = 0;
                                         if ($query_author && $returned_author) {
                                             $author_match = 1 if $returned_author =~ /\Q$query_author\E/i 
                                                               || $query_author =~ /\Q$returned_author\E/i;
                                         }
                                         
-                                        # 判定：标题匹配 > 40% 且作者匹配
                                         if ($title_ratio > 0.4 && $author_match) {
                                             $status = 'found';
                                             $message = "DOI verified (title: " . int($title_ratio * 100) . "%, author: matched)";
@@ -331,12 +288,9 @@ websocket '/ws/:workdir' => sub {
                     }
 
                     $c->send(encode_json({
-                        type => 'result',
-                        index => $i, total => $total,
-                        key => $key, title => $title,
-                        author => $author, year => $year,
-                        doi => $doi, status => $status,
-                        message => $message, score => $score,
+                        type => 'result', index => $i, total => $total,
+                        key => $key, title => $title, author => $author, year => $year,
+                        doi => $doi, status => $status, message => $message, score => $score,
                     }));
 
                     if ($i >= $total) {
@@ -590,13 +544,15 @@ ws.onmessage = function(e) {
         var row = document.getElementById('row-' + data.index);
         if (row) {
             var doiCell = '';
+            
+            // ✅ 这里是修改过的地方：让 low_confidence 也能点击！
             if (data.status === 'found') {
                 row.className = 'row-found';
                 doiCell = '<a class="doi-link" href="https://doi.org/' + data.doi + '" target="_blank">' + data.doi + '</a>';
             } else if (data.status === 'low_confidence') {
                 row.className = 'row-low';
                 var clickableDoi = data.doi ? '<a class="doi-link" href="https://doi.org/' + data.doi + '" target="_blank">' + data.doi + '</a>' : 'N/A';
-                doiCell = (data.doi || 'N/A') + '<br><span style="font-size:10px;">' + esc(data.message) + '</span>';
+                doiCell = clickableDoi + '<br><span style="font-size:10px;">' + esc(data.message) + '</span>';
             } else if (data.status === 'not_found') {
                 row.className = 'row-not-found';
                 doiCell = '<span style="color:#e65100;">No DOI found in CrossRef</span>';
